@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Sample Root Page</title>
+</head>
+
+<body>
+
+  <h1>Welcome to the Search Pictogram Page</h1>
+
+  <form th:object="${queryForm}" method="get" th:action="@{/search}">
+    <input type="text" th:field="*{query}" maxlength="120" placeholder="Enter text here">
+    <button type="submit">Send</button>
+  </form>
+  <!-- TODO(sara): error message -->
+  <p th:text="${id}"></p>
+</body>
+
+</html>

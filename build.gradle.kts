@@ -17,8 +17,16 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter")
+	implementation("org.springframework.boot:spring-boot-starter-webflux")
+	implementation("org.springframework.boot:spring-boot-starter-aop")
+	// implementation("com.theokanning.openai-gpt3-java:service:0.16.0")
+	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+  // implementation("org.thymeleaf:thymeleaf-spring6")
+  implementation("jakarta.validation:jakarta.validation-api")
+	compileOnly("org.projectlombok:lombok")
+	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("io.projectreactor:reactor-test")
 }
 
 tasks.withType<Test> {
