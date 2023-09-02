@@ -14,7 +14,9 @@
     <input type="text" th:field="*{query}" maxlength="120" placeholder="Enter text here">
     <button type="submit">Send</button>
   </form>
-  <!-- TODO(sara): error message -->
+  <span class="text-danger" th:if="${#fields.hasErrors('query')}" th:errors="*{query}">
+    Please enter text.
+  </span>
   <p th:text="${id}"></p>
 </body>
 

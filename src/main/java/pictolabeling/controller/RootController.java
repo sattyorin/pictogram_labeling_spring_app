@@ -1,9 +1,15 @@
 package pictolabeling.controller;
 
+import java.util.Map;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.reactive.result.view.Rendering;
+import org.springframework.web.server.ServerWebExchange;
 import pictolabeling.form.QueryForm;
 import reactor.core.publisher.Mono;
 
@@ -31,8 +37,19 @@ public class RootController {
    *
    * @return page.html
    */
-  @RequestMapping("/")
-  public Mono<Rendering> handler() {
+  @GetMapping("/")
+  public Mono<Rendering> rootHandler(@Validated @ModelAttribute("queryForm") QueryForm queryForm,
+      BindingResult result, ServerWebExchange exchange) {
+    if (result.hasErrors()) {
+      return Mono.just(Rendering.view("error").build());
+    }
+    Mono<QueryForm> attributeMono = exchange.getAttribute("queryForm");
+    System.out.println(attributeMono);
+
+    // spring webfluxとModelAttributeは一緒に使わないかな。
+    Map<String, Object> attributes = exchange.getAttributes();
+    System.out.println(attributes);
+
     return Mono.just(Rendering.view("page").build());
   }
 }
